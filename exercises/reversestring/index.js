@@ -10,8 +10,16 @@
 //   return str.split('').reverse().join('');
 // }
 
+// function reverse(str) {
+//   return str.split('').reduce((prev, curr) => curr + prev);
+// }
+
 function reverse(str) {
-  return str.split('').reduce((prev, curr) => curr + prev);
+  let reversedStr = '';
+  for (let character of str) {
+    reversedStr = character + reversedStr;
+  }
+  return reversedStr;
 }
 
 module.exports = reverse;
