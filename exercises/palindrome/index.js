@@ -12,4 +12,12 @@ function palindrome(str) {
   return str === reversedStr;
 }
 
+// this one does unnecessary checks below
+// function palindrome(str) {
+//   const arr = str.split('');
+//   return arr.every((element, index) => {
+//     return arr[index] === arr[arr.length - index - 1];
+//   })
+// }
+
 module.exports = palindrome;
