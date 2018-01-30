@@ -8,23 +8,45 @@
 // chunk([1, 2, 3, 4, 5], 4) --> [[ 1, 2, 3, 4], [5]]
 // chunk([1, 2, 3, 4, 5], 10) --> [[ 1, 2, 3, 4, 5]]
 
+// function chunk(array, size) {
+//   let arrChunk = [];
+//   let output = [];
+//   let sizeIndex = 1;
+//   for(let i = 0; i < array.length; i++) {
+//     if (sizeIndex <= size) {
+//       arrChunk.push(array[i]);
+//       sizeIndex++;
+//     } else {
+//       output.push(arrChunk);
+//       arrChunk = [];
+//       arrChunk.push(array[i]);
+//       sizeIndex = 2;
+//     }
+//   }
+//   if (arrChunk.length != 0) {
+//     output.push(arrChunk);
+//   }
+//   return output;
+// }
+
 function chunk(array, size) {
-  let arrChunk = [];
+  let chunked = [];
   let output = [];
-  let sizeIndex = 1;
-  for(let i = 0; i < array.length; i++) {
-    if (sizeIndex <= size) {
-      arrChunk.push(array[i]);
-      sizeIndex++;
+  for (let elem of array) {
+    if (!chunked) {
+      chunked.push(elem);
     } else {
-      output.push(arrChunk);
-      arrChunk = [];
-      arrChunk.push(array[i]);
-      sizeIndex = 2;
+      if (chunked.length == size) {
+        output.push(chunked);
+        chunked = [];
+        chunked.push(elem);
+      } else {
+        chunked.push(elem);
+      }
     }
   }
-  if (arrChunk.length != 0) {
-    output.push(arrChunk);
+  if (chunked.length != 0) {
+    output.push(chunked);
   }
   return output;
 }
