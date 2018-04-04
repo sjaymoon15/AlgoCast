@@ -24,6 +24,28 @@
 
 const Queue = require('./queue');
 
-function weave(sourceOne, sourceTwo) {}
+function weave(sourceOne, sourceTwo) {
+  // returns an instance of Queue.
+  // peek and if exists then pop -> add to queue
+  // how can we alternate between two sources ?
+  const combinedQueue = new Queue();
+  let currentQueue = 1;
+  while (sourceOne.peek() || sourceTwo.peek()) {
+    if (currentQueue == 1) {
+      if (sourceOne.peek()) {
+        combinedQueue.add(sourceOne.remove());
+      }
+      currentQueue = 2;
+    }
+    if (currentQueue == 2) {
+      if (sourceTwo.peek()) {
+        combinedQueue.add(sourceTwo.remove());
+      }
+      currentQueue = 1;
+    }
+  }
+
+  return combinedQueue;
+}
 
 module.exports = weave;
