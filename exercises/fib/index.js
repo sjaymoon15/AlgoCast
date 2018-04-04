@@ -23,14 +23,25 @@
 
 // make the array up to n
 // [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+// function fib(n) {
+//   const result = [0, 1];
+//   // i == 2
+//   // result.push(result[i-2] + result[i-1])
+//   for (let i = 2; i <= n; i++) {
+//     result.push(result[i-2] + result[i-1]);
+//   }
+//   return result[n];
+// }
+
+// memoi?
 function fib(n) {
-  const result = [0, 1];
-  // i == 2
-  // result.push(result[i-2] + result[i-1])
-  for (let i = 2; i <= n; i++) {
-    result.push(result[i-2] + result[i-1]);
+  if (n < 2) {
+    return n;
   }
-  return result[n];
+
+  
+  return fib(n-1) + fib(n-2);
 }
+
 
 module.exports = fib;
