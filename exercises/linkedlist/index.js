@@ -33,12 +33,27 @@ class LinkedList {
     return this.head;
   }
 
+  // getLast() {
+  //   let currentHead = this.head;
+  //   if (currentHead && currentHead.next) {
+  //     while(currentHead.next) {
+  //       currentHead = currentHead.next;
+  //     }
+  //   }
+  //   return currentHead;
+  // }
+
   getLast() {
-    let currentHead = this.head;
-    while(currentHead.next) {
-      currentHead = currentHead.next;
+    if (!this.head) {
+      return null;
     }
-    return currentHead;
+    let node = this.head;
+    while(node) {
+      if (!node.next) {
+        return node;
+      }
+      node = node.next;
+    }
   }
 
   clear() {
@@ -56,23 +71,93 @@ class LinkedList {
     }
   }
 
+  // removeLast() {
+  //   if (!this.head) {
+  //     return;
+  //   }
+  //   let prevNode = this.head;
+  //   if (!prevNode.next) {
+  //     this.head = null;
+  //     this.numItem = 0;
+  //   } else {
+  //     let currentNode = prevNode.next;
+  //     while(currentNode.next) {
+  //       currentNode = currentNode.next;
+  //       prevNode = prevNode.next;
+  //     }
+  //     prevNode.next = null;
+  //     this.numItem--;
+  //   }
+  // }
+
   removeLast() {
+    // no head
     if (!this.head) {
       return;
     }
-    let prevNode = this.head;
-    if (!prevNode.next) {
+    // no head.next
+    if (!this.head.next) {
       this.head = null;
       this.numItem = 0;
-    } else {
-      let currentNode = prevNode.next;
-      while(currentNode.next) {
-        currentNode = currentNode.next;
-        prevNode = prevNode.next;
-      }
-      prevNode.next = null;
-      this.numItem--;
+      return;
     }
+    //
+    let prevNode = this.head;
+    let currentNode = prevNode.next;
+    while(currentNode.next) {
+      currentNode = currentNode.next;
+      prevNode = prevNode.next;
+    }
+    prevNode.next = null;
+    this.numItem--;
+
+  }
+
+  // insertLast(record) {
+  //   const lastNode = this.getLast();
+  //   const newNode = new Node(record, null);
+  //   lastNode.next = newNode;
+  //   this.numItem++;
+  // }
+
+  insertLast(record) {
+    const lastNode = this.getLast();
+    if (lastNode) {
+      const newNode = new Node(record, null);
+      lastNode.next = newNode;
+      this.numItem++;
+    } else {
+      this.head = new Node(record, null);
+    }
+  }
+
+  getAt(index) {
+    let currentIndex = 0;
+    let currentNode = this.head;
+    while(currentIndex < index) {
+      if(currentNode && currentNode.next) {
+        currentNode = currentNode.next;
+        currentIndex++;
+      } else {
+        return null;
+      }
+    }
+    return currentNode;
+  }
+
+  removeAt(index) {
+    if (!this.getAt(index)) {
+      return;
+    }
+    if (index === 0) {
+      this.head = this.head.next;
+      return;
+    }
+    const prevNode = this.getAt(index - 1);
+    // const nextNode = this.getAt(index + 1);
+    
+    const nextNode = prevNode.next.next;
+    prevNode.next = nextNode;
   }
 }
 
