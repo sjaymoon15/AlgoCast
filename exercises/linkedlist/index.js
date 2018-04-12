@@ -154,10 +154,31 @@ class LinkedList {
       return;
     }
     const prevNode = this.getAt(index - 1);
-    // const nextNode = this.getAt(index + 1);
-    
+    if (!prevNode.next) {
+      return;
+    }
     const nextNode = prevNode.next.next;
     prevNode.next = nextNode;
+  }
+
+  // Didn't get this
+  insertAt(record, index) {
+    if (!this.head) {
+      this.head = new Node(record, null);
+      this.numItem++;
+      return;
+    }
+
+    if (index === 0) {
+      const oldHead = this.head;
+      this.head = new Node(record, oldHead);
+      this.numItem++;
+      return;
+    }
+
+    const prevNode = this.getAt(index - 1) || this.getLast();
+    const newNode = new Node(record, prevNode.next);
+    prevNode.next = newNode;
   }
 }
 
