@@ -161,7 +161,7 @@ class LinkedList {
     prevNode.next = nextNode;
   }
 
-  // Didn't get this
+  // Didn't get this first time
   insertAt(record, index) {
     if (!this.head) {
       this.head = new Node(record, null);
@@ -180,6 +180,18 @@ class LinkedList {
     const newNode = new Node(record, prevNode.next);
     prevNode.next = newNode;
   }
+
+  forEach(fn) {
+    if (!this.head) {
+      return;
+    }
+    let currentNode = this.head;
+    while (currentNode) {
+      fn(currentNode);
+      currentNode = currentNode.next;
+    }
+  }
+
 }
 
 module.exports = { Node, LinkedList };
